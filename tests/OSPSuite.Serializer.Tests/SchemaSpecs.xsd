@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema targetNamespace="http://www.pk-sim.com/SimModelSchema" xmlns:bts="http://www.pk-sim.com/SimModelSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:complexType name="ProjectType">
+    <xs:all>
+      <xs:element minOccurs="1" maxOccurs="1" name="Compound" type="bts:CompoundType" />
+    </xs:all>
+
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="id" type="xs:string" use="required" />
+    <xs:attribute name="version" type="xs:string" use="required" />
+    <xs:attribute name="autoPropertyReadOnlyNoSetter" type="xs:string" use="required" />
+
+  </xs:complexType>
+
+  <xs:element name="Project" type="bts:ProjectType" />
+  <xs:element name="Parameter" type="bts:ParameterType" />
+
+  <xs:complexType name="CompoundType">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="id" type="xs:string" use="required" />
+    <xs:attribute name="compoundType" type="xs:string" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ParameterType">
+    <xs:all>
+      <xs:element minOccurs="1" maxOccurs="1" name="DisplayName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InfoParam" type="bts:ParameterInfoType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UnitList" type="bts:UnitListType" />
+    </xs:all>
+    <xs:attribute name="id" type="xs:string" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ParameterInfoType">
+    <xs:all>
+      <xs:element minOccurs="1" maxOccurs="1" name="TheDescription" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="UnitListType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Unit" type="bts:UnitType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UnitType">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="color" type="xs:string" use="required" />
+  </xs:complexType>
+  
+</xs:schema>
