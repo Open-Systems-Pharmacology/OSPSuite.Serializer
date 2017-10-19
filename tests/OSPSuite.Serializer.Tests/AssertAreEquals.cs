@@ -28,6 +28,7 @@ namespace OSPSuite.Serializer.Tests
          x1.Id.ShouldBeEqualTo(x2.Id);
          Formulations(x1.Formulation, x2.Formulation);
          Formulations(x1.AnotherFormulation, x2.AnotherFormulation);
+         x1.IsValid.ShouldBeEqualTo(x2.IsValid);
       }
 
       public static void Formulations(IFormulation x1, IFormulation x2)

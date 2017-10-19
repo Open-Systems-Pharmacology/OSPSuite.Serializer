@@ -180,6 +180,7 @@ namespace OSPSuite.Serializer.Tests
    {
       public IFormulation Formulation { get; set; }
       public IFormulation AnotherFormulation { get; set; }
+      public bool? IsValid { get; set; }
    }
 
    public class Compound : Entity
