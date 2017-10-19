@@ -79,7 +79,8 @@
     <Compile Include="AssemblySerializerScanner.cs" />
     <Compile Include="Attributes\AttributeMapper.cs" />
     <Compile Include="Attributes\AttributeMapperNotFoundException.cs" />
-    <Compile Include="Attributes\NullableIntAttribueMapper.cs" />
+    <Compile Include="Attributes\NullableBoolAttributeMapper.cs" />
+    <Compile Include="Attributes\NullableIntAttributeMapper.cs" />
     <Compile Include="EnumerableMap.cs" />
     <Compile Include="EnumerableMappingException.cs" />
     <Compile Include="EnumerableMappingPart.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="Attributes\IReferenceMapper.cs" />
     <Compile Include="Attributes\LongAttributeMapper.cs" />
     <Compile Include="Attributes\NullableDoubleAttributeMapper.cs" />
-    <Compile Include="Attributes\NullableFloatAttribueMapper.cs" />
+    <Compile Include="Attributes\NullableFloatAttributeMapper.cs" />
     <Compile Include="Attributes\NullableAttributeMapper.cs" />
     <Compile Include="Attributes\StringAttributeMapper.cs" />
     <Compile Include="Attributes\AttributeMappingException.cs" />

@@ -92,6 +92,7 @@
     <Compile Include="AssertAreEquals.cs" />
     <Compile Include="BoolAttributeMapperSpecs.cs" />
     <Compile Include="CacheXmlSerializerSpecs.cs" />
+    <Compile Include="NullableBoolAttributeMapperSpecs.cs" />
     <Compile Include="NullableIntAttributeMapperSpecs.cs" />
     <Compile Include="ClassesForSpecs.cs" />
     <Compile Include="ColorAttributeMapperSpecs.cs" />

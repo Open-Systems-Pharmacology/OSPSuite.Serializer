@@ -22,10 +22,7 @@ namespace OSPSuite.Serializer.Attributes
          return attributeType == typeof (TAttribute);
       }
 
-      public Type ObjectType
-      {
-         get { return typeof (TAttribute); }
-      }
+      public Type ObjectType => typeof (TAttribute);
 
       public abstract string Convert(TAttribute valueToConvert, TContext context);
    }
