@@ -11,8 +11,11 @@ namespace OSPSuite.Serializer.Attributes
 
       public override object ConvertFrom(string attributeValue, TContext context)
       {
-         if (attributeValue == "1") return true;
-         if (attributeValue == "0") return false;
+         if (attributeValue == "1")
+            return true;
+
+         if (attributeValue == "0")
+            return false;
 
          return attributeValue.ConvertedTo<bool>();
       }

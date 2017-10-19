@@ -66,9 +66,7 @@ namespace OSPSuite.Serializer.Attributes
       public void AddAttributeMapper(IAttributeMapper<TContext> attributeMapper)
       {
          if (containsAttributeFor(attributeMapper.ObjectType))
-            throw new ArgumentException(
-               string.Format("A attribute mapper for type '{0}' is already registered in the repository '{1}'.",
-                  attributeMapper.ObjectType, GetType()));
+            throw new ArgumentException($"A attribute mapper for type '{attributeMapper.ObjectType}' is already registered in the repository '{GetType()}'.");
 
          _allAttributes.Add(attributeMapper);
       }
@@ -78,14 +76,15 @@ namespace OSPSuite.Serializer.Attributes
          AddAttributeMapper(new IntAttributeMapper<TContext>());
          AddAttributeMapper(new DoubleAttributeMapper<TContext>());
          AddAttributeMapper(new FloatAttributeMapper<TContext>());
-         AddAttributeMapper(new NullableDoubleAttributeMapper<TContext>());
-         AddAttributeMapper(new NullableFloatAttributeMapper<TContext>());
-         AddAttributeMapper(new NullableIntAttributeMapper<TContext>());
          AddAttributeMapper(new BoolAttributeMapper<TContext>());
          AddAttributeMapper(new StringAttributeMapper<TContext>());
          AddAttributeMapper(new UintAttributeMapper<TContext>());
          AddAttributeMapper(new DateTimeAttributeMapper<TContext>());
          AddAttributeMapper(new ColorAttributeMapper<TContext>());
+         AddAttributeMapper(new NullableDoubleAttributeMapper<TContext>());
+         AddAttributeMapper(new NullableFloatAttributeMapper<TContext>());
+         AddAttributeMapper(new NullableIntAttributeMapper<TContext>());
+         AddAttributeMapper(new NullableBoolAttributeMapper<TContext>());
       }
 
       private bool containsAttributeFor(Type type)

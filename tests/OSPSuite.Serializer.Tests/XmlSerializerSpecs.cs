@@ -205,6 +205,7 @@ namespace OSPSuite.Serializer.Tests
          _result.Id.ShouldBeEqualTo(_applicationToSerialize.Id);
          _result.Formulation.ShouldBeAnInstanceOf<MyFormulation>();
          _result.Formulation.Id.ShouldBeEqualTo(_applicationToSerialize.Formulation.Id);
+         _result.IsValid.ShouldBeEqualTo(_applicationToSerialize.IsValid);
       }
    }
 

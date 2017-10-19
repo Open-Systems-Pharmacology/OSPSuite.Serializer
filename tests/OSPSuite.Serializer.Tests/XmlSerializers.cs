@@ -236,6 +236,7 @@ namespace OSPSuite.Serializer.Tests
          Map(x => x.Id);
          Map(x => x.Formulation);
          Map(x => x.AnotherFormulation);
+         Map(x => x.IsValid);
       }
    }
 
