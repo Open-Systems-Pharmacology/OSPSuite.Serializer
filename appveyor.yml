@@ -24,10 +24,6 @@ build:
   publish_nuget: true
   verbosity: minimal
 
-skip_tags: true
-
-skip_branch_with_pr: true
-
 branches:
   only:
     - develop
