@@ -248,7 +248,7 @@ namespace OSPSuite.Serializer.Xml
             return matchingSerializers[0];
 
          if (matchingSerializers.Count > 1)
-            throw new AmbigousSerializerException(matchingSerializers, typeOfObjectToSerialize);
+            throw new AmbiguousSerializerException(matchingSerializers, typeOfObjectToSerialize);
 
          //do we have a serializer that matches the inhouse conventions
          matchingSerializers = _allSerializer.Where(item => $"I{item.ObjectType.Name}" == typeOfObjectToSerialize.Name).ToList();
@@ -275,7 +275,7 @@ namespace OSPSuite.Serializer.Xml
             return simplifiedSerializer[0];
 
          //at least two implementations. Serialization call is ambiguous and cannot be resolved at run time.
-         throw new AmbigousSerializerException(allPossibleSerializers, typeOfObjectToSerialize);
+         throw new AmbiguousSerializerException(allPossibleSerializers, typeOfObjectToSerialize);
       }
 
       private IEnumerable<IXmlSerializer<TContext>> simplify(IReadOnlyList<IXmlSerializer<TContext>> allPossibleSerializers)

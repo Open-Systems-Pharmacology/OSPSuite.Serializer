@@ -8,7 +8,7 @@ namespace OSPSuite.Serializer.Attributes
       {
          if (typeof (TEnum).IsEnum) return;
 
-         throw new ArgumentException(string.Format("'{0}' is not an enum type and cannot be used with the EnumAttributeMapper", typeof (TEnum)));
+         throw new ArgumentException($"'{typeof(TEnum)}' is not an enum type and cannot be used with the EnumAttributeMapper");
       }
 
       public override object ConvertFrom(string attributeValue, TContext context)

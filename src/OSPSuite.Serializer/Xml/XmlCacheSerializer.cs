@@ -14,7 +14,7 @@ namespace OSPSuite.Serializer.Xml
    {
       private const string _keyValueDefaultName = "KeyValue";
 
-      public XmlCacheSerializer() : this(string.Format("Cache{0}{1}", typeof (TKey).Name, typeof (TValue).Name))
+      public XmlCacheSerializer() : this($"Cache{typeof(TKey).Name}{typeof(TValue).Name}")
       {
       }
 

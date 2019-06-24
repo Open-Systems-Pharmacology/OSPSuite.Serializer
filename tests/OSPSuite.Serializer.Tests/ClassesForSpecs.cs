@@ -82,7 +82,7 @@ namespace OSPSuite.Serializer.Tests
 
    public class Project : Container, IProject, IContainer2
    {
-      private readonly int _version = 3;
+      private int _version = 3;
       protected readonly int _protectedReadOnlyField = 3;
       protected int _protectedField = 3;
       public string AutoPropertyProtectedSet { get; private set; }

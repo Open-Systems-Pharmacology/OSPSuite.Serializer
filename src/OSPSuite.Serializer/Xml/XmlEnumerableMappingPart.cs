@@ -30,7 +30,7 @@ namespace OSPSuite.Serializer.Xml
          {
             var nodeMapper = new XmlEnumerationNodeMapper<TObject, TProperty, TContext>(_serializerRepository, _enumerableMap);
             nodeMapper.MappingName = MappingName ?? PropertyMap.MappingName;
-            nodeMapper.ChildMappingName = ChildMappingName ?? string.Format("{0}Child", nodeMapper.MappingName);
+            nodeMapper.ChildMappingName = ChildMappingName ?? $"{nodeMapper.MappingName}Child";
             return nodeMapper;
          }
       }

@@ -14,8 +14,8 @@ namespace OSPSuite.Serializer.Attributes
 
       public override string Convert(Color color, TContext context)
       {
-         if (color.IsKnownColor)
-            return color.ToKnownColor().ToString();
+         if (color.IsNamedColor)
+            return color.Name;
 
          return color.ToArgb().ToString(_numberFormatInfo);
       }
@@ -25,8 +25,7 @@ namespace OSPSuite.Serializer.Attributes
          if (string.IsNullOrEmpty(attributeValue))
             return Color.Empty;
 
-         int argb;
-         if (int.TryParse(attributeValue, out argb))
+         if (int.TryParse(attributeValue, out var argb))
          {
             // Color was saved as ARGB value
             return Color.FromArgb(argb);
