@@ -6,7 +6,7 @@ init:
   - cmd: if DEFINED APPVEYOR_PULL_REQUEST_NUMBER (Set build_number=1) ELSE (Set build_number=%APPVEYOR_BUILD_NUMBER%)
 
 environment:
-  app_version: '2.0.1'
+  app_version: '3.0.0'
 
 version: '$(app_version).{build}'
 
