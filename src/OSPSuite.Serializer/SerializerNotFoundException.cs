@@ -1,22 +1,21 @@
 using System;
-using OSPSuite.Utility.Extensions;
 
 namespace OSPSuite.Serializer
 {
    public class SerializerNotFoundException : Exception
    {
-      private const string _errorMessage = "Unable to find a serializer for '{0}'";
+      private static string errorMessage(string objectName) => $"Unable to find a serializer for '{objectName}'";
 
       public SerializerNotFoundException(Type typeOfObject) : this(typeOfObject.ToString())
       {
       }
 
-      public SerializerNotFoundException(string objectName) : base(_errorMessage.FormatWith(objectName))
+      public SerializerNotFoundException(string objectName) : base(errorMessage(objectName))
       {
       }
 
       public SerializerNotFoundException(Type typeOfObject, Type typeOfContainerObject)
-         : base(string.Format("{0} in {1}", _errorMessage.FormatWith(typeOfObject), typeOfContainerObject))
+         : base($"{errorMessage(typeOfObject.ToString())} in {typeOfContainerObject}")
       {
       }
    }

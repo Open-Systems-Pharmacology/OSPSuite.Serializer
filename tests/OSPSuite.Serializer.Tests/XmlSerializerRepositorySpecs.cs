@@ -67,7 +67,7 @@ namespace OSPSuite.Serializer.Tests
       }
 
       [Observation]
-      public void should_iterate_through_all_registered_mapper_and_leverate_the_perform_mapping_action()
+      public void should_iterate_through_all_registered_mapper_and_leverage_the_perform_mapping_action()
       {
          A.CallTo(()=>_serializerCompound.PerformMapping()).MustHaveHappened();
          A.CallTo(() => _serializerProject.PerformMapping()).MustHaveHappened();
@@ -104,7 +104,7 @@ namespace OSPSuite.Serializer.Tests
       [Observation]
       public void should_throw_an_exception()
       {
-         The.Action(() => sut.SerializerFor<Project>()).ShouldThrowAn<AmbigousSerializerException>();
+         The.Action(() => sut.SerializerFor<Project>()).ShouldThrowAn<AmbiguousSerializerException>();
       }
    }
 

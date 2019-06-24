@@ -33,14 +33,14 @@ namespace OSPSuite.Serializer.Reflection
             return new ReadWritePropertyAccessor(propertyInfo);
 
          //we have a readonly property. Try to find a backing field corresponding to the property
-         var fieldInfos = typeof (TObject).AllFields().Where(mi => privateMemberMatchesNamingConventions(mi, member.Name)).ToList();
+         var fieldInfos = typeof(TObject).AllFields().Where(mi => privateMemberMatchesNamingConventions(mi, member.Name)).ToList();
 
          //we found one, return the property accessor
          if (fieldInfos.Count == 1)
             return new ReadOnlyPropertyWithPrivateFieldAccesor(propertyInfo, fieldInfos[0]);
 
          //last try: Find a property that might be read only and return it
-         var propertyInfos = typeof (TObject).AllProperties().Where(prop => prop.Name == member.Name).ToList();
+         var propertyInfos = typeof(TObject).AllProperties().Where(prop => prop.Name == member.Name).ToList();
          if (propertyInfos.Count == 1)
             propertyInfo = propertyInfos[0];
 
@@ -52,13 +52,17 @@ namespace OSPSuite.Serializer.Reflection
 
       public IMemberAccessor CreateFor<TObject, TProperty>(string memberName)
       {
-         var allFields = typeof (TObject).AllFields().Where(type => type.Name == memberName)
-            .Where(type => type.FieldType == typeof (TProperty)).ToList();
+         var allFields = typeof(TObject).AllFields().Where(type => type.Name == memberName)
+            .Where(type => type.FieldType == typeof(TProperty)).ToList();
 
          if (allFields.Count != 1)
-            throw new MemberAccessException(typeof (TObject), typeof (TProperty), memberName);
+            throw new MemberAccessException(typeof(TObject), typeof(TProperty), memberName);
 
-         return new FieldAccessor(allFields[0]);
+         var field = allFields[0];
+         if (field.IsInitOnly)
+            throw new MemberAccessException(typeof(TObject), typeof(TProperty), memberName);
+
+         return new FieldAccessor(field);
       }
 
       private bool privateMemberMatchesNamingConventions(MemberInfo memberInfo, string propertyName)

@@ -9,7 +9,7 @@ namespace OSPSuite.Serializer.Attributes
          "Unsupported attribute mapping found for:\ntype = '{0}'\nexpression = '{1}'.\n";
 
       public AttributeMappingException(Type typeToMap, string expression)
-         : base(_exceptionMessage.FormatWith(typeToMap.ToString(), expression))
+         : base($"Unsupported attribute mapping found for:\ntype = '{typeToMap}'\nexpression = '{expression}'.\n")
       {
       }
    }
