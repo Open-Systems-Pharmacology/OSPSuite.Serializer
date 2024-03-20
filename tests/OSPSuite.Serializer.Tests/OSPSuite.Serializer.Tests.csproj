@@ -13,7 +13,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.0" />
     <PackageReference Include="OSPSuite.BDDHelper" Version="4.0.0.1" />
-    <PackageReference Include="OSPSuite.Utility" Version="4.0.0.1" />
+    <PackageReference Include="OSPSuite.Utility" Version="4.1.0.6" />
   </ItemGroup>
 
   <ItemGroup>

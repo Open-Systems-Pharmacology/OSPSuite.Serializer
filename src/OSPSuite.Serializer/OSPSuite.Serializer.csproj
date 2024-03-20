@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OSPSuite.Utility" Version="4.0.0.1" />
+    <PackageReference Include="OSPSuite.Utility" Version="4.1.0.6" />
   </ItemGroup>
 
   <ItemGroup>
