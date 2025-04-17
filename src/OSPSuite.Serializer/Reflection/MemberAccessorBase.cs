@@ -13,15 +13,9 @@ namespace OSPSuite.Serializer.Reflection
          _memberType = memberType;
       }
 
-      public string Name
-      {
-         get { return _name; }
-      }
+      public string Name => _name;
 
-      public Type MemberType
-      {
-         get { return _memberType; }
-      }
+      public Type MemberType => _memberType;
 
       public abstract object GetValue(object source);
       public abstract void SetValue(object destination, object value);

@@ -16,7 +16,6 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   
    public class When_deserializing_a_color_created_from_rgb : concern_for_color_attribute_mapper
    {
       private Color _colorFromRGB;
@@ -26,8 +25,8 @@ namespace OSPSuite.Serializer.Tests
       {
          base.Context();
          _colorFromRGB = Color.FromArgb(234, 55, 56);
-
       }
+
       protected override void Because()
       {
          _serializedString = sut.Convert(_colorFromRGB, _context);
@@ -36,7 +35,7 @@ namespace OSPSuite.Serializer.Tests
       [Observation]
       public void should_be_able_to_read_the_serialized_color()
       {
-         sut.ConvertFrom(_serializedString, _context).ShouldBeEqualTo(_colorFromRGB);   
+         sut.ConvertFrom(_serializedString, _context).ShouldBeEqualTo(_colorFromRGB);
       }
    }
 
@@ -49,8 +48,8 @@ namespace OSPSuite.Serializer.Tests
       {
          base.Context();
          _colorFromName = Color.FromKnownColor(KnownColor.AntiqueWhite);
-
       }
+
       protected override void Because()
       {
          _serializedString = sut.Convert(_colorFromName, _context);
@@ -62,5 +61,4 @@ namespace OSPSuite.Serializer.Tests
          sut.ConvertFrom(_serializedString, _context).ShouldBeEqualTo(_colorFromName);
       }
    }
-
-}	
+}

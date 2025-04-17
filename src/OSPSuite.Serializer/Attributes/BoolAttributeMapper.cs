@@ -2,12 +2,9 @@ using OSPSuite.Utility.Extensions;
 
 namespace OSPSuite.Serializer.Attributes
 {
-   public class BoolAttributeMapper<TContext> : AttributeMapper<bool,TContext>
+   public class BoolAttributeMapper<TContext> : AttributeMapper<bool, TContext>
    {
-      public override string Convert(bool valueToConvert, TContext context)
-      {
-         return valueToConvert ? "1" : "0";
-      }
+      public override string Convert(bool valueToConvert, TContext context) => valueToConvert ? "1" : "0";
 
       public override object ConvertFrom(string attributeValue, TContext context)
       {

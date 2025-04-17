@@ -4,7 +4,7 @@ using System.Threading;
 namespace OSPSuite.Serializer
 {
    /// <summary>
-   /// Performs string interning (i.e same string will only be saved once in memory)
+   ///    Performs string interning (i.e. same string will only be saved once in memory)
    /// </summary>
    internal static class StringInterning
    {

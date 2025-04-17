@@ -17,12 +17,12 @@ namespace OSPSuite.Serializer.Reflection
    {
       public IMemberAccessor CreateFor<TObject, TProperty>(Expression<Func<TObject, TProperty>> expression)
       {
-         MemberExpression memberExpression = new ExpressionInspector<TObject>().GetMemberExpression(expression);
-         MemberInfo member = memberExpression.Member;
+         var memberExpression = new ExpressionInspector<TObject>().GetMemberExpression(expression);
+         var member = memberExpression.Member;
 
          //We have a field. Return a simple field accessor
-         if (member is FieldInfo)
-            return new FieldAccessor((FieldInfo) member);
+         if (member is FieldInfo info)
+            return new FieldAccessor(info);
 
          //We have a property. If the property is read write, we can simply return a property accessor
          var propertyInfo = member as PropertyInfo;
@@ -37,7 +37,7 @@ namespace OSPSuite.Serializer.Reflection
 
          //we found one, return the property accessor
          if (fieldInfos.Count == 1)
-            return new ReadOnlyPropertyWithPrivateFieldAccesor(propertyInfo, fieldInfos[0]);
+            return new ReadOnlyPropertyWithPrivateFieldAccessor(propertyInfo, fieldInfos[0]);
 
          //last try: Find a property that might be read only and return it
          var propertyInfos = typeof(TObject).AllProperties().Where(prop => prop.Name == member.Name).ToList();
@@ -65,9 +65,7 @@ namespace OSPSuite.Serializer.Reflection
          return new FieldAccessor(field);
       }
 
-      private bool privateMemberMatchesNamingConventions(MemberInfo memberInfo, string propertyName)
-      {
-         return MemberNamingConventions.AllConventions.Any(x => x.Matches(memberInfo.Name, propertyName));
-      }
+      private bool privateMemberMatchesNamingConventions(MemberInfo memberInfo, string propertyName) =>
+         MemberNamingConventions.AllConventions.Any(x => x.Matches(memberInfo.Name, propertyName));
    }
 }

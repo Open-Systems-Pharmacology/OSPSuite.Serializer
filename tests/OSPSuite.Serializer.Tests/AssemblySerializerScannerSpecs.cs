@@ -17,17 +17,16 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   
    public class When_asked_to_register_all_type_for_a_given_assembly_implementing_a_certain_interface : concern_for_assembly_serializer_scanner
    {
       protected override void Because()
       {
          _serializerRepository.AddSerializers(x =>
-                                                 {
-                                                    x.Implementing<IXmlSerializer>();
-                                                    x.InAssemblyContainingType<Project>();
-                                                    x.UsingAttributeRepository(new AttributeMapperRepository<TestSerializationContext>());
-                                                 });
+         {
+            x.Implementing<IXmlSerializer>();
+            x.InAssemblyContainingType<Project>();
+            x.UsingAttributeRepository(new AttributeMapperRepository<TestSerializationContext>());
+         });
       }
 
       [Observation]
@@ -44,38 +43,36 @@ namespace OSPSuite.Serializer.Tests
       public void should_throw_an_exception()
       {
          The.Action(() => _serializerRepository.AddSerializers(x =>
-                                                                  {
-                                                                     x.InAssemblyContainingType<Project>();
-                                                                     x.UsingAttributeRepository(new AttributeMapperRepository<TestSerializationContext>());
-                                                                  })).ShouldThrowAn<Exception>();
+         {
+            x.InAssemblyContainingType<Project>();
+            x.UsingAttributeRepository(new AttributeMapperRepository<TestSerializationContext>());
+         })).ShouldThrowAn<Exception>();
       }
    }
 
-   
    public class When_the_assembly_to_scan_was_not_defined : concern_for_assembly_serializer_scanner
    {
       [Observation]
       public void should_throw_an_exception()
       {
          The.Action(() => _serializerRepository.AddSerializers(x =>
-                                                                  {
-                                                                     x.Implementing<IXmlSerializer>();
-                                                                     x.UsingAttributeRepository(new AttributeMapperRepository<TestSerializationContext>());
-                                                                  })).ShouldThrowAn<Exception>();
+         {
+            x.Implementing<IXmlSerializer>();
+            x.UsingAttributeRepository(new AttributeMapperRepository<TestSerializationContext>());
+         })).ShouldThrowAn<Exception>();
       }
    }
 
-   
    public class When_the_attribute_repository_was_not_defined : concern_for_assembly_serializer_scanner
    {
       [Observation]
       public void should_throw_an_exception()
       {
          The.Action(() => _serializerRepository.AddSerializers(x =>
-                                                                  {
-                                                                     x.Implementing<IXmlSerializer>();
-                                                                     x.InAssemblyContainingType<Project>();
-                                                                  })).ShouldThrowAn<Exception>();
+         {
+            x.Implementing<IXmlSerializer>();
+            x.InAssemblyContainingType<Project>();
+         })).ShouldThrowAn<Exception>();
       }
    }
 }

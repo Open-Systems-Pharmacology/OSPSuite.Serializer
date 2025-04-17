@@ -21,15 +21,17 @@ namespace OSPSuite.Serializer.Xml
 
       public Func<TObject, TContext, Action<TProperty>> AddFunction
       {
-         set { _enumerableMap.AddFunction = value; }
+         set => _enumerableMap.AddFunction = value;
       }
 
       public override IXmlMapper<TObject, TContext> Mapper
       {
          get
          {
-            var nodeMapper = new XmlEnumerationNodeMapper<TObject, TProperty, TContext>(_serializerRepository, _enumerableMap);
-            nodeMapper.MappingName = MappingName ?? PropertyMap.MappingName;
+            var nodeMapper = new XmlEnumerationNodeMapper<TObject, TProperty, TContext>(_serializerRepository, _enumerableMap)
+            {
+               MappingName = MappingName ?? PropertyMap.MappingName
+            };
             nodeMapper.ChildMappingName = ChildMappingName ?? $"{nodeMapper.MappingName}Child";
             return nodeMapper;
          }

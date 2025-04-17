@@ -50,7 +50,7 @@ namespace OSPSuite.Serializer.Tests
       {
          MapEnumerable(x => x.MyStringProperties, addStringProperties).WithChildMappingName("MyStringProperty");
 
-         //hier child name not defined
+         //child name not defined
          MapEnumerable(x => x.MyDoubleProperties, addDoubleProperties);
       }
 

@@ -13,9 +13,6 @@ namespace OSPSuite.Serializer
       public IPropertyMap PropertyMap { get; }
       public string ExpressionName => PropertyMap.Name;
 
-      protected MappingPart(IPropertyMap propertyMap)
-      {
-         PropertyMap = propertyMap;
-      }
+      protected MappingPart(IPropertyMap propertyMap) => PropertyMap = propertyMap;
    }
 }

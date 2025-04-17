@@ -19,10 +19,7 @@ namespace OSPSuite.Serializer.Reflection
          _isInternal = _fieldInfo.IsPrivate || _fieldInfo.IsFamily;
       }
 
-      public override object GetValue(object source)
-      {
-         return _getHandler(source);
-      }
+      public override object GetValue(object source) => _getHandler(source);
 
       public override void SetValue(object destination, object value)
       {

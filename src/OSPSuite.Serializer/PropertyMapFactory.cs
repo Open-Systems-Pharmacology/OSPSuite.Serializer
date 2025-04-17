@@ -34,10 +34,8 @@ namespace OSPSuite.Serializer
          return propertyMap;
       }
 
-      public IEnumerableMap<TObject, TProperty, TContext> CreateFor<TObject, TProperty, TContext>(Expression<Func<TObject, IEnumerable<TProperty>>> expression)
-      {
-         return new EnumerableMap<TObject, TProperty, TContext>(expression);
-      }
+      public IEnumerableMap<TObject, TProperty, TContext> CreateFor<TObject, TProperty, TContext>(Expression<Func<TObject, IEnumerable<TProperty>>> expression) => 
+         new EnumerableMap<TObject, TProperty, TContext>(expression);
 
       public IPropertyMap<TProperty> CreateFor<TObject, TProperty>(string memberName)
       {

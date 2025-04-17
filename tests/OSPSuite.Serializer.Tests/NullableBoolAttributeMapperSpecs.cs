@@ -44,7 +44,7 @@ namespace OSPSuite.Serializer.Tests
    public class When_converting_a_string_to_a_nullable_bol_value : concern_for_NullableBoolAttributeMapper
    {
       [Observation]
-      public void should_return_null_for_an_empty_stirng()
+      public void should_return_null_for_an_empty_string()
       {
          sut.ConvertFrom(string.Empty, _context).ShouldBeEqualTo(null);
       }

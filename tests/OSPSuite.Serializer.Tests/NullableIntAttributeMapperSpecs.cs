@@ -16,7 +16,6 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   
    public class When_converting_a_nullable_int_value_to_string : concern_for_NullableIntAttributeMapper
    {
       private int? _nullInt;
@@ -32,30 +31,30 @@ namespace OSPSuite.Serializer.Tests
       [Observation]
       public void should_return_the_null_string_for_a_null_value()
       {
-         sut.Convert(_nullInt,_context).ShouldBeNull();
+         sut.Convert(_nullInt, _context).ShouldBeNull();
       }
 
       [Observation]
       public void should_return_a_valid_string_for_a_value_that_is_not_null()
       {
-         sut.Convert(_nullIntNotEmpty,_context).ShouldBeEqualTo("5");
+         sut.Convert(_nullIntNotEmpty, _context).ShouldBeEqualTo("5");
       }
    }
 
    public class When_converting_a_string_to_a_nullable_int_value : concern_for_NullableIntAttributeMapper
    {
       [Observation]
-      public void should_return_null_for_an_empty_stirng()
+      public void should_return_null_for_an_empty_string()
       {
-         sut.ConvertFrom(string.Empty,_context).ShouldBeEqualTo(null);
+         sut.ConvertFrom(string.Empty, _context).ShouldBeEqualTo(null);
       }
 
       [Observation]
       public void should_return_a_nullable_double_with_the_accurate_value_for_a_non_empty_string()
       {
-         var value = sut.ConvertFrom("5",_context).ConvertedTo<int?>();
+         var value = sut.ConvertFrom("5", _context).ConvertedTo<int?>();
          value.ShouldNotBeNull();
          value.Value.ShouldBeEqualTo(5);
       }
    }
-}	
+}

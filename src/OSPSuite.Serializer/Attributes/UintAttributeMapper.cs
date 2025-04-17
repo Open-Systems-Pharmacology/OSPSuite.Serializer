@@ -2,23 +2,12 @@ using System.Globalization;
 
 namespace OSPSuite.Serializer.Attributes
 {
-   public class UintAttributeMapper<TContext> : AttributeMapper<uint,TContext>
+   public class UintAttributeMapper<TContext> : AttributeMapper<uint, TContext>
    {
-      private readonly NumberFormatInfo _numberFormatInfo;
+      private readonly NumberFormatInfo _numberFormatInfo = new NumberFormatInfo();
 
-      public UintAttributeMapper()
-      {
-         _numberFormatInfo = new NumberFormatInfo();
-      }
+      public override string Convert(uint valueToConvert, TContext context) => valueToConvert.ToString(_numberFormatInfo);
 
-      public override string Convert(uint valueToConvert, TContext context)
-      {
-         return valueToConvert.ToString(_numberFormatInfo);
-      }
-
-      public override object ConvertFrom(string attributeValue, TContext context)
-      {
-         return uint.Parse(attributeValue, _numberFormatInfo);
-      }
+      public override object ConvertFrom(string attributeValue, TContext context) => uint.Parse(attributeValue, _numberFormatInfo);
    }
 }

@@ -5,10 +5,10 @@ using OSPSuite.Utility.Collections;
 namespace OSPSuite.Serializer.Xml
 {
    /// <summary>
-   /// Add a default implementation for a cache serializer of TKey and TValue
-   /// The TKey and TValue should not be objects that would be otherwise serialized as attributes 
-   /// The implementation bypasses the default add method if defined. Create method should be overriden
-   /// if a specific add method was defined
+   ///    Add a default implementation for a cache serializer of TKey and TValue
+   ///    The TKey and TValue should not be objects that would be otherwise serialized as attributes
+   ///    The implementation bypasses the default add method if defined. Create method should be overriden
+   ///    if a specific add method was defined
    /// </summary>
    public class XmlCacheSerializer<TKey, TValue, TContext> : XmlSerializer<ICache<TKey, TValue>, TContext>
    {
@@ -32,14 +32,14 @@ namespace OSPSuite.Serializer.Xml
 
       protected override void TypedDeserialize(ICache<TKey, TValue> cache, XElement cacheElement, TContext context)
       {
-         foreach (XElement keyValueElement in cacheElement.Elements(KeyValueNode))
+         foreach (var keyValueElement in cacheElement.Elements(KeyValueNode))
          {
             //not right format
             if (keyValueElement.Elements().Count() < 2) continue;
             var keyNode = keyValueElement.Elements().ElementAt(0);
             var valueNode = keyValueElement.Elements().ElementAt(1);
 
-            var key = SerializerRepository.SerializerFor(keyNode).Deserialize<TKey>(keyNode,context);
+            var key = SerializerRepository.SerializerFor(keyNode).Deserialize<TKey>(keyNode, context);
             var value = SerializerRepository.SerializerFor(valueNode).Deserialize<TValue>(valueNode, context);
             cache.Add(key, value);
          }
@@ -56,12 +56,10 @@ namespace OSPSuite.Serializer.Xml
             keyValueElement.Add(SerializerRepository.SerializerFor(keyValue.Value).Serialize(keyValue.Value, context));
             cacheElement.Add(keyValueElement);
          }
+
          return cacheElement;
       }
 
-      public override ICache<TKey, TValue> CreateObject(XElement element, TContext context)
-      {
-         return new Cache<TKey, TValue>();
-      }
+      public override ICache<TKey, TValue> CreateObject(XElement element, TContext context) => new Cache<TKey, TValue>();
    }
 }

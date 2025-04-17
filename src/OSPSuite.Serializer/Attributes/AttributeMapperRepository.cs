@@ -23,20 +23,11 @@ namespace OSPSuite.Serializer.Attributes
       private readonly List<IAttributeMapper<TContext>> _allAttributes = new List<IAttributeMapper<TContext>>();
       public IReferenceMapper<TContext> ReferenceMapper { get; set; }
 
-      public IEnumerable<IAttributeMapper<TContext>> All()
-      {
-         return _allAttributes;
-      }
+      public IEnumerable<IAttributeMapper<TContext>> All() => _allAttributes;
 
-      public IAttributeMapper<TContext> AttributeMapperFor<T>()
-      {
-         return AttributeMapperFor(typeof (T));
-      }
+      public IAttributeMapper<TContext> AttributeMapperFor<T>() => AttributeMapperFor(typeof(T));
 
-      public IAttributeMapper<TContext> AttributeMapperOrDefaultFor<T>()
-      {
-         return AttributeMapperOrDefaultFor(typeof (T));
-      }
+      public IAttributeMapper<TContext> AttributeMapperOrDefaultFor<T>() => AttributeMapperOrDefaultFor(typeof(T));
 
       public IAttributeMapper<TContext> AttributeMapperFor(Type type)
       {
@@ -47,15 +38,9 @@ namespace OSPSuite.Serializer.Attributes
          throw new AttributeMapperNotFoundException(type);
       }
 
-      public IAttributeMapper<TContext> AttributeMapperOrDefaultFor(Type type)
-      {
-         return _allAttributes.FirstOrDefault(attr => attr.IsMatch(type));
-      }
+      public IAttributeMapper<TContext> AttributeMapperOrDefaultFor(Type type) => _allAttributes.FirstOrDefault(attr => attr.IsMatch(type));
 
-      public void RemoveAttributeMapperFor<T>()
-      {
-         RemoveAttributeMapperFor(typeof (T));
-      }
+      public void RemoveAttributeMapperFor<T>() => RemoveAttributeMapperFor(typeof(T));
 
       public void RemoveAttributeMapperFor(Type type)
       {
@@ -87,9 +72,6 @@ namespace OSPSuite.Serializer.Attributes
          AddAttributeMapper(new NullableBoolAttributeMapper<TContext>());
       }
 
-      private bool containsAttributeFor(Type type)
-      {
-         return AttributeMapperOrDefaultFor(type) != null;
-      }
+      private bool containsAttributeFor(Type type) => AttributeMapperOrDefaultFor(type) != null;
    }
 }

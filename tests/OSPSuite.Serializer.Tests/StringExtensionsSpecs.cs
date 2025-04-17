@@ -11,7 +11,6 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-
    public class When_converting_a_string_in_pascal_case : concern_for_string_extensions
    {
       [Observation]
@@ -21,7 +20,6 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-
    public class When_converting_a_null_or_empty_string_to_pascal_case : concern_for_string_extensions
    {
       [Observation]
@@ -30,7 +28,6 @@ namespace OSPSuite.Serializer.Tests
          string.IsNullOrEmpty("".ToPascalCase()).ShouldBeTrue();
       }
    }
-
 
    public class When_converting_a_string_that_is_not_in_pascal_case : concern_for_string_extensions
    {

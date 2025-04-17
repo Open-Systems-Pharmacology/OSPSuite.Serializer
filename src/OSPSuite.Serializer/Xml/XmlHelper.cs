@@ -59,10 +59,7 @@ namespace OSPSuite.Serializer.Xml
       /// <summary>
       ///    returns the string representing the xml element and remove the formatting
       /// </summary>
-      public static string XmlContentToString(XElement element)
-      {
-         return element.ToString(SaveOptions.DisableFormatting);
-      }
+      public static string XmlContentToString(XElement element) => element.ToString(SaveOptions.DisableFormatting);
 
       public static byte[] XmlContentToByte(XElement element)
       {
@@ -74,6 +71,7 @@ namespace OSPSuite.Serializer.Xml
                textWriter.Indentation = 0;
                element.Save(textWriter);
             }
+
             return stream.ToArray();
          }
       }
@@ -91,10 +89,7 @@ namespace OSPSuite.Serializer.Xml
 
       public static Action<XElement, string> SaveXmlElementToFile = saveXmlElementToFile;
 
-      private static void saveXmlElementToFile(XElement element, string fileName)
-      {
-         saveXmlObjectToFile(fileName, element.Save);
-      }
+      private static void saveXmlElementToFile(XElement element, string fileName) => saveXmlObjectToFile(fileName, element.Save);
 
       private static void saveXmlObjectToFile(string fileName, Action<XmlTextWriter> saveAction)
       {

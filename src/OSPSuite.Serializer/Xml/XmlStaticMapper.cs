@@ -2,7 +2,7 @@ using System.Xml.Linq;
 
 namespace OSPSuite.Serializer.Xml
 {
-   internal class XmlStaticMapper<TObject, TContext> : IXmlMapper<TObject,TContext>
+   internal class XmlStaticMapper<TObject, TContext> : IXmlMapper<TObject, TContext>
    {
       private readonly IPropertyMap _propertyMap;
       private readonly IXmlSerializer<TContext> _serializer;

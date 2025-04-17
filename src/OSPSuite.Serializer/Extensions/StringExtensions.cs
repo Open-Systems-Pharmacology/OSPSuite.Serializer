@@ -7,8 +7,10 @@ namespace OSPSuite.Serializer.Extensions
          if (string.IsNullOrEmpty(stringToConvert))
             return stringToConvert;
 
-         char[] allChars = stringToConvert.ToCharArray();
-         char firstChar = allChars[0];
+         var allChars = stringToConvert.ToCharArray();
+
+         var firstChar = allChars[0];
+
          if (!char.IsUpper(firstChar))
             return stringToConvert;
 
