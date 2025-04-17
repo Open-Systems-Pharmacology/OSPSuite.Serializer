@@ -1,9 +1,11 @@
 using System.Drawing;
 using System.Linq;
+using System.Xml.Linq;
 using OSPSuite.BDDHelper;
 using OSPSuite.BDDHelper.Extensions;
 using OSPSuite.Serializer.Attributes;
 using OSPSuite.Serializer.Xml;
+using OSPSuite.Serializer.Xml.Extensions;
 using OSPSuite.Utility.Collections;
 using OSPSuite.Utility.Extensions;
 
@@ -46,6 +48,51 @@ namespace OSPSuite.Serializer.Tests
       protected override void Because()
       {
          var element = sut.Serialize(_cache, _context);
+         _deserialized = sut.Deserialize(element, _context).DowncastTo<ICache<Compound, Unit>>();
+      }
+
+      [Observation]
+      public void should_be_able_to_retrieve_the_cache()
+      {
+         _deserialized.ShouldNotBeNull();
+         _deserialized.Count().ShouldBeEqualTo(2);
+      }
+   }
+
+   public class When_deserializing_a_cache_object_with_unknown_key : concern_for_CacheXmlSerializer
+   {
+      private ICache<Compound, Unit> _deserialized;
+
+      protected override void Because()
+      {
+         var element = sut.Serialize(_cache, _context);
+         var newElement = new XElement("KeyValue");
+         newElement.AddElement(new XElement("unknown"));
+         newElement.AddElement(new XElement("Unit").AddAttribute("name", "mg").AddAttribute("color", "blue"));
+         
+         element.AddElement(newElement);
+         _deserialized = sut.Deserialize(element, _context).DowncastTo<ICache<Compound, Unit>>();
+      }
+
+      [Observation]
+      public void should_be_able_to_retrieve_the_cache()
+      {
+         _deserialized.ShouldNotBeNull();
+         _deserialized.Count.ShouldBeEqualTo(2);
+      }
+   }
+
+   public class When_deserializing_a_cache_object_with_unknown_value : concern_for_CacheXmlSerializer
+   {
+      private ICache<Compound, Unit> _deserialized;
+
+      protected override void Because()
+      {
+         var element = sut.Serialize(_cache, _context);
+         var newElement = new XElement("KeyValue");
+         newElement.AddElement(new XElement("Compound")).AddAttribute("id", 3).AddAttribute("name", "something").AddAttribute("compoundType", "base");
+         newElement.AddElement(new XElement("unknown"));
+         element.AddElement(newElement);
          _deserialized = sut.Deserialize(element, _context).DowncastTo<ICache<Compound, Unit>>();
       }
 

@@ -19,7 +19,8 @@ namespace OSPSuite.Serializer.Xml
       public XObject Serialize(TObject objectToSerialize, TContext context)
       {
          var subObject = _propertyMap.ResolveValue(objectToSerialize);
-         if (subObject == null) return null;
+         if (subObject == null) 
+            return null;
 
          var serializer = _serializerRepository.SerializerFor(subObject);
          var subNode = serializer.Serialize(subObject, context);
@@ -35,6 +36,9 @@ namespace OSPSuite.Serializer.Xml
          var subNode = element.GetFirstElementWithAttribute(SerializerConstants.DynamicName, _propertyMap.Name);
          if (subNode == null) return;
          var serializer = _serializerRepository.SerializerFor(subNode);
+         if (serializer == null)
+            return;
+
          _propertyMap.SetValue(objectToDeserialize, serializer.Deserialize(subNode, context));
       }
    }

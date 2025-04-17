@@ -35,12 +35,20 @@ namespace OSPSuite.Serializer.Xml
          foreach (var keyValueElement in cacheElement.Elements(KeyValueNode))
          {
             //not right format
-            if (keyValueElement.Elements().Count() < 2) continue;
+            if (keyValueElement.Elements().Count() < 2) 
+               continue;
+
             var keyNode = keyValueElement.Elements().ElementAt(0);
             var valueNode = keyValueElement.Elements().ElementAt(1);
 
-            var key = SerializerRepository.SerializerFor(keyNode).Deserialize<TKey>(keyNode, context);
-            var value = SerializerRepository.SerializerFor(valueNode).Deserialize<TValue>(valueNode, context);
+            var keySerializer = SerializerRepository.SerializerFor(keyNode);
+            var valueSerializer = SerializerRepository.SerializerFor(valueNode);
+
+            if(keySerializer == null || valueSerializer == null)
+               continue;
+
+            var key = keySerializer.Deserialize<TKey>(keyNode, context);
+            var value = valueSerializer.Deserialize<TValue>(valueNode, context);
             cache.Add(key, value);
          }
       }

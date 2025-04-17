@@ -7,6 +7,7 @@ using OSPSuite.BDDHelper;
 using OSPSuite.BDDHelper.Extensions;
 using OSPSuite.Serializer.Attributes;
 using OSPSuite.Serializer.Xml;
+using OSPSuite.Serializer.Xml.Extensions;
 using OSPSuite.Utility.Reflection;
 using OSPSuite.Utility.Xml;
 
@@ -600,10 +601,12 @@ namespace OSPSuite.Serializer.Tests
       protected override void Context()
       {
          base.Context();
-         _entityCache = new EntityCache();
-         _entityCache.Add(new Entity("1"));
-         _entityCache.Add(new Entity("2"));
-         _entityCache.Add(new Entity("3"));
+         _entityCache =
+         [
+            new Entity("1"),
+            new Entity("2"),
+            new Entity("3")
+         ];
          sut = new XmlEntityCacheSerializer().WithRepositories(_serializerRepository, _attributeMapperRepository);
          _serializerRepository.AddSerializer(sut);
          _serializerRepository.AddSerializer(new XmlEntitySerializer().WithRepositories(_serializerRepository, _attributeMapperRepository));
@@ -615,7 +618,38 @@ namespace OSPSuite.Serializer.Tests
       public void should_be_able_to_create_sub_nodes_for_each_child_of_the_enumeration()
       {
          _result = sut.Deserialize<EntityCache>(_xmlToDeserialize, _context);
-         _result.Count().ShouldBeEqualTo(_result.Count());
+         _result.Count.ShouldBeEqualTo(_entityCache.Count);
+      }
+   }
+
+   public class When_serializing_an_enumerable_object_when_serializer_is_missing : concern_for_XmlSerializer<EntityCache>
+   {
+      private EntityCache _entityCache;
+      private XElement _xmlToDeserialize;
+      private EntityCache _result;
+
+      protected override void Context()
+      {
+         base.Context();
+         _entityCache =
+         [
+            new Entity("1"),
+            new Entity("2"),
+            new Entity("3")
+         ];
+         sut = new XmlEntityCacheSerializer().WithRepositories(_serializerRepository, _attributeMapperRepository);
+         _serializerRepository.AddSerializer(sut);
+         _serializerRepository.AddSerializer(new XmlEntitySerializer().WithRepositories(_serializerRepository, _attributeMapperRepository));
+         _serializerRepository.PerformMapping();
+         _xmlToDeserialize = sut.Serialize(_entityCache, _context);
+         _xmlToDeserialize.Elements().First().AddElement(new XElement("unknown"));
+      }
+
+      [Observation]
+      public void should_be_able_to_create_sub_nodes_for_each_child_of_the_enumeration_ignoring_the_unknown()
+      {
+         _result = sut.Deserialize<EntityCache>(_xmlToDeserialize, _context);
+         _result.Count.ShouldBeEqualTo(_entityCache.Count);
       }
    }
 }
