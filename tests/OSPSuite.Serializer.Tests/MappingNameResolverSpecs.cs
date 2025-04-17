@@ -11,7 +11,6 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-
    public class When_resolving_the_mapping_name_for_a_given_name : concern_for_mapping_name_resolver
    {
       [Observation]
@@ -30,7 +29,6 @@ namespace OSPSuite.Serializer.Tests
          sut.MappingNameFor("<TOTO>k__BackingField").ShouldBeEqualTo("TOTO");
       }
    }
-
 
    public class When_resolving_the_mapping_name_for_an_invalid_input : concern_for_mapping_name_resolver
    {

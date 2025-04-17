@@ -17,7 +17,7 @@ namespace OSPSuite.Serializer.Xml
       public IAttributeMapperRepository<TContext> AttributeMapperRepository { protected get; set; }
       public string ElementName { get; set; }
 
-      protected XmlSerializer() : this(typeof (TObject).Name)
+      protected XmlSerializer() : this(typeof(TObject).Name)
       {
       }
 
@@ -34,10 +34,7 @@ namespace OSPSuite.Serializer.Xml
 
       public abstract void PerformMapping();
 
-      public T Deserialize<T>(XElement outputToDeserialize, TContext context)
-      {
-         return Deserialize(outputToDeserialize, context).DowncastTo<T>();
-      }
+      public T Deserialize<T>(XElement outputToDeserialize, TContext context) => Deserialize(outputToDeserialize, context).DowncastTo<T>();
 
       public override bool Equals(object obj)
       {
@@ -45,22 +42,13 @@ namespace OSPSuite.Serializer.Xml
          return serializer != null && serializer.Name == Name;
       }
 
-      public override int GetHashCode()
-      {
-         return Name.GetHashCode();
-      }
+      public override int GetHashCode() => Name.GetHashCode();
 
       public string Name { get; }
 
-      public XElement Serialize(object objectToSerialize, TContext context)
-      {
-         return TypedSerialize(objectToSerialize.DowncastTo<TObject>(), context);
-      }
+      public XElement Serialize(object objectToSerialize, TContext context) => TypedSerialize(objectToSerialize.DowncastTo<TObject>(), context);
 
-      public void Deserialize(object objectToDeserialize, XElement outputToDeserialize, TContext context)
-      {
-         TypedDeserialize(objectToDeserialize.DowncastTo<TObject>(), outputToDeserialize, context);
-      }
+      public void Deserialize(object objectToDeserialize, XElement outputToDeserialize, TContext context) => TypedDeserialize(objectToDeserialize.DowncastTo<TObject>(), outputToDeserialize, context);
 
       public object Deserialize(XElement outputToDeserialize, TContext context)
       {
@@ -97,10 +85,7 @@ namespace OSPSuite.Serializer.Xml
          return mappingPart;
       }
 
-      public IXmlEnumerableMappingPart<TObject, TProperty, TContext> MapEnumerable<TProperty>(Expression<Func<TObject, IEnumerable<TProperty>>> expression, Func<TObject, Action<TProperty>> addFunction)
-      {
-         return MapEnumerable(expression, (o, ctx) => addFunction(o));
-      }
+      public IXmlEnumerableMappingPart<TObject, TProperty, TContext> MapEnumerable<TProperty>(Expression<Func<TObject, IEnumerable<TProperty>>> expression, Func<TObject, Action<TProperty>> addFunction) => MapEnumerable(expression, (o, ctx) => addFunction(o));
 
       public IXmlEnumerableMappingPart<TObject, TProperty, TContext> MapEnumerable<TProperty>(Expression<Func<TObject, IEnumerable<TProperty>>> expression, Func<TObject, TContext, Action<TProperty>> addFunction)
       {
@@ -120,7 +105,7 @@ namespace OSPSuite.Serializer.Xml
          return ObjectType.CreateInstance<TObject>();
       }
 
-      public Type ObjectType => typeof (TObject);
+      public Type ObjectType => typeof(TObject);
 
       public void SetRepositories(IXmlSerializerRepository<TContext> serializerRepository, IAttributeMapperRepository<TContext> attributeMapperRepository)
       {

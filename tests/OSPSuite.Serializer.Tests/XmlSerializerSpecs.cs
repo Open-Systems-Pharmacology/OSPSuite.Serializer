@@ -26,7 +26,7 @@ namespace OSPSuite.Serializer.Tests
          _attributeMapperRepository = new AttributeMapperRepository<TestSerializationContext>();
          _attributeMapperRepository.AddDefaultAttributeMappers();
          _projectToSerialize = new Project(2);
-         _projectToSerialize.Compound = new Compound("1") {Name = "toto", CompoundType = "acid"};
+         _projectToSerialize.Compound = new Compound("1") { Name = "toto", CompoundType = "acid" };
 
          _projectToSerialize.Name = "Toto";
          _context = new TestSerializationContext();
@@ -61,7 +61,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_serialzing_a_property_to_xml_for_which_no_attribute_mapper_was_defined : concern_for_XmlSerializer<AnotherProject>
+   public class When_serializing_a_property_to_xml_for_which_no_attribute_mapper_was_defined : concern_for_XmlSerializer<AnotherProject>
    {
       protected override void Context()
       {
@@ -77,7 +77,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_serialzing_a_private_member_to_xml_for_which_the_type_was_not_specified_correctly : concern_for_XmlSerializer<AnotherProject>
+   public class When_serializing_a_private_member_to_xml_for_which_the_type_was_not_specified_correctly : concern_for_XmlSerializer<AnotherProject>
    {
       protected override void Context()
       {
@@ -93,7 +93,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_serialzing_a_private_member_to_xml_for_which_the_member_name_was_not_specified_correctly : concern_for_XmlSerializer<AnotherProject>
+   public class When_serializing_a_private_member_to_xml_for_which_the_member_name_was_not_specified_correctly : concern_for_XmlSerializer<AnotherProject>
    {
       protected override void Context()
       {
@@ -179,7 +179,7 @@ namespace OSPSuite.Serializer.Tests
       protected override void Context()
       {
          base.Context();
-         _applicationToSerialize = new Application {Formulation = new MyFormulation()};
+         _applicationToSerialize = new Application { Formulation = new MyFormulation() };
          sut = new XmlApplicationSerializer();
          sut.SetRepositories(_serializerRepository, _attributeMapperRepository);
          _serializerRepository.AddSerializer(new XmlFormulationSerializer().WithRepositories(_serializerRepository, _attributeMapperRepository));
@@ -209,7 +209,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_perfoming_the_mapping_for_an_xml_serializer_registering_a_dynamic_property_more_than_once : concern_for_XmlSerializer<Application>
+   public class When_performing_the_mapping_for_an_xml_serializer_registering_a_dynamic_property_more_than_once : concern_for_XmlSerializer<Application>
    {
       protected override void Context()
       {
@@ -226,7 +226,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_perfoming_the_mapping_for_an_xml_serializer_registering_a_dynamic_property_that_is_not_availabe : concern_for_XmlSerializer<Application>
+   public class When_performing_the_mapping_for_an_xml_serializer_registering_a_dynamic_property_that_is_not_availabe : concern_for_XmlSerializer<Application>
    {
       protected override void Context()
       {
@@ -252,7 +252,7 @@ namespace OSPSuite.Serializer.Tests
       {
          base.Context();
          _compound = new Compound();
-         sut = new OverrideCreationCompoundSerializer {Compound = _compound}.WithRepositories(_serializerRepository, _attributeMapperRepository);
+         sut = new OverrideCreationCompoundSerializer { Compound = _compound }.WithRepositories(_serializerRepository, _attributeMapperRepository);
          _serializerRepository.PerformMapping();
          _xmlToDeserialize = sut.Serialize(_compound, _context);
       }
@@ -349,7 +349,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_deserialzing_an_object_to_xml_for_which_some_dynamic_map_properties_are_null : concern_for_XmlSerializer<Application>
+   public class When_deserializing_an_object_to_xml_for_which_some_dynamic_map_properties_are_null : concern_for_XmlSerializer<Application>
    {
       private XElement _xmlToDeserialize;
       private Application _applicationToSerialize;
@@ -359,7 +359,7 @@ namespace OSPSuite.Serializer.Tests
       {
          base.Context();
          sut = new XmlApplicationSerializer().WithRepositories(_serializerRepository, _attributeMapperRepository);
-         _applicationToSerialize = new Application {Formulation = null, AnotherFormulation = new MyFormulation()};
+         _applicationToSerialize = new Application { Formulation = null, AnotherFormulation = new MyFormulation() };
          sut = new XmlApplicationSerializer().WithRepositories(_serializerRepository, _attributeMapperRepository);
          _serializerRepository.AddSerializer(new XmlFormulationSerializer().WithRepositories(_serializerRepository, _attributeMapperRepository));
          _serializerRepository.AddSerializer(sut);
@@ -474,7 +474,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_serializing_a_complex_object_hiearchy_with_references_and_enumeration_to_the_same_object_type_to_xml : concern_for_XmlSerializer<Model>
+   public class When_serializing_a_complex_object_hierarchy_with_references_and_enumeration_to_the_same_object_type_to_xml : concern_for_XmlSerializer<Model>
    {
       private Model _model;
       private XElement _xmlToDeserialize;
@@ -483,7 +483,7 @@ namespace OSPSuite.Serializer.Tests
       protected override void Context()
       {
          base.Context();
-         _model = new Model {Name = "MyModel"};
+         _model = new Model { Name = "MyModel" };
          var root = new Container("Root");
          root.AddChild(new Entity("MyEntity"));
          root.AddChild(new Container("MySubContainer"));
@@ -516,7 +516,7 @@ namespace OSPSuite.Serializer.Tests
       protected override void Context()
       {
          base.Context();
-         _model = new Model {Name = "MyModel"};
+         _model = new Model { Name = "MyModel" };
          var root = new Container("Root");
          root.AddChild(new Entity("MyEntity"));
          root.AddChild(new Container("MySubContainer"));
@@ -542,7 +542,7 @@ namespace OSPSuite.Serializer.Tests
       protected override void Context()
       {
          base.Context();
-         _model = new Model {Name = "MyModel"};
+         _model = new Model { Name = "MyModel" };
          var root = new Container("Root");
          root.AddChild(new Entity("MyEntity"));
          root.AddChild(new Container("MySubContainer"));
@@ -612,7 +612,7 @@ namespace OSPSuite.Serializer.Tests
       }
 
       [Observation]
-      public void should_be_able_to_create_sub_nodes_for_each_child_of_the_enumeratin()
+      public void should_be_able_to_create_sub_nodes_for_each_child_of_the_enumeration()
       {
          _result = sut.Deserialize<EntityCache>(_xmlToDeserialize, _context);
          _result.Count().ShouldBeEqualTo(_result.Count());

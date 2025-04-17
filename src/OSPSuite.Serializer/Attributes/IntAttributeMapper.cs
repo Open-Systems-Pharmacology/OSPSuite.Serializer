@@ -4,21 +4,10 @@ namespace OSPSuite.Serializer.Attributes
 {
    public class IntAttributeMapper<TContext> : AttributeMapper<int, TContext>
    {
-      private readonly NumberFormatInfo _numberFormatInfo;
+      private readonly NumberFormatInfo _numberFormatInfo = new NumberFormatInfo();
 
-      public IntAttributeMapper()
-      {
-         _numberFormatInfo = new NumberFormatInfo();
-      }
+      public override string Convert(int valueToConvert, TContext context) => valueToConvert.ToString(_numberFormatInfo);
 
-      public override string Convert(int valueToConvert, TContext context)
-      {
-         return valueToConvert.ToString(_numberFormatInfo);
-      }
-
-      public override object ConvertFrom(string attributeValue, TContext context)
-      {
-         return int.Parse(attributeValue, _numberFormatInfo);
-      }
+      public override object ConvertFrom(string attributeValue, TContext context) => int.Parse(attributeValue, _numberFormatInfo);
    }
 }

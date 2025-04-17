@@ -9,7 +9,7 @@ namespace OSPSuite.Serializer.Tests
 {
    internal abstract class concern_for_EnumerationNodeMapper : ContextSpecification<XmlEnumerationNodeMapper<Container, IEntity, TestSerializationContext>>
    {
-      protected IEnumerableMap<Container, IEntity,TestSerializationContext> _enumerableMap;
+      protected IEnumerableMap<Container, IEntity, TestSerializationContext> _enumerableMap;
       protected IXmlSerializerRepository<TestSerializationContext> _serializerRepository;
       protected IXmlSerializer<TestSerializationContext> _serializer;
       protected TestSerializationContext _context;
@@ -20,8 +20,8 @@ namespace OSPSuite.Serializer.Tests
          _serializer = A.Fake<IXmlSerializer<TestSerializationContext>>();
          _serializerRepository = A.Fake<IXmlSerializerRepository<TestSerializationContext>>();
          A.CallTo(_serializerRepository).WithReturnType<IXmlSerializer<TestSerializationContext>>().Returns(_serializer);
-         A.CallTo(()=>_serializerRepository.CreateElement(A<string>._))
-            .ReturnsLazily(x=>new XElement(x.GetArgument<string>(0)));
+         A.CallTo(() => _serializerRepository.CreateElement(A<string>._))
+            .ReturnsLazily(x => new XElement(x.GetArgument<string>(0)));
 
          _enumerableMap = A.Fake<IEnumerableMap<Container, IEntity, TestSerializationContext>>();
          A.CallTo(() => _serializer.Name).Returns("Serializer");
@@ -30,7 +30,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   internal class When_the_enumeation_node_mapper_is_asked_to_serialize_an_enumeration : concern_for_EnumerationNodeMapper
+   internal class When_the_enumeration_node_mapper_is_asked_to_serialize_an_enumeration : concern_for_EnumerationNodeMapper
    {
       private Container _container;
       private XElement _result;
@@ -60,7 +60,7 @@ namespace OSPSuite.Serializer.Tests
 
       protected override void Because()
       {
-         _result = (XElement) sut.Serialize(_container, _context);
+         _result = (XElement)sut.Serialize(_container, _context);
       }
 
       [Observation]

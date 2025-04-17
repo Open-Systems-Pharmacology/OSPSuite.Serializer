@@ -18,8 +18,8 @@ namespace OSPSuite.Serializer.Tests
       {
          sut = new XmlCacheSerializer<Compound, Unit, TestSerializationContext>();
          _cache = new Cache<Compound, Unit>();
-         var d1 = new Unit {Name = "mg", Color = Color.WhiteSmoke};
-         var p1 = new Compound("1"){Name = "toto", CompoundType= "Acid" };
+         var d1 = new Unit { Name = "mg", Color = Color.WhiteSmoke };
+         var p1 = new Compound("1") { Name = "toto", CompoundType = "Acid" };
 
          var d2 = new Unit { Name = "oo", Color = Color.Wheat };
          var p2 = new Compound("2") { Name = "tata", CompoundType = "base" };
@@ -39,15 +39,14 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   
-   public class When_deserializng_a_cache_object : concern_for_CacheXmlSerializer
+   public class When_deserializing_a_cache_object : concern_for_CacheXmlSerializer
    {
       private ICache<Compound, Unit> _deserialized;
-      
+
       protected override void Because()
       {
-         var element = sut.Serialize(_cache,_context);
-         _deserialized = sut.Deserialize(element,_context).DowncastTo<ICache<Compound, Unit>>();
+         var element = sut.Serialize(_cache, _context);
+         _deserialized = sut.Deserialize(element, _context).DowncastTo<ICache<Compound, Unit>>();
       }
 
       [Observation]
@@ -57,4 +56,4 @@ namespace OSPSuite.Serializer.Tests
          _deserialized.Count().ShouldBeEqualTo(2);
       }
    }
-}	
+}

@@ -12,11 +12,10 @@ namespace OSPSuite.Serializer.Tests
       protected override void Context()
       {
          sut = new NullableDoubleAttributeMapper<TestSerializationContext>();
-         _context = new  TestSerializationContext();
+         _context = new TestSerializationContext();
       }
    }
 
-   
    public class When_converting_a_nullable_value_to_string : concern_for_NullableDoubleAttributeMapper
    {
       private double? _nullDouble;
@@ -42,11 +41,10 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   
    public class When_converting_a_string_to_a_nullable_value : concern_for_NullableDoubleAttributeMapper
    {
       [Observation]
-      public void should_return_null_for_an_empty_stirng()
+      public void should_return_null_for_an_empty_string()
       {
          sut.ConvertFrom(string.Empty, _context).ShouldBeEqualTo(null);
       }

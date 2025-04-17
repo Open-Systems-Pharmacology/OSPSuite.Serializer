@@ -12,12 +12,12 @@ namespace OSPSuite.Serializer.Xml
    public interface IXmlSerializerRepository<TContext>
    {
       /// <summary>
-      /// Perform current mapping and throws an exception if any registered serializer is not valid
+      ///    Perform current mapping and throws an exception if any registered serializer is not valid
       /// </summary>
       void PerformMapping();
 
       /// <summary>
-      /// Remove all avalaible serializer from the repository
+      ///    Remove all available serializer from the repository
       /// </summary>
       void Clear();
 
@@ -96,15 +96,15 @@ namespace OSPSuite.Serializer.Xml
       /// <summary>
       ///    Return the list of all available serializers for a given type
       /// </summary>
-      /// <param name="typeOfObjectToSerialize">type for which all registeres serializer are requested</param>
-      /// <returns>the list of all availale serializers for a given type</returns>
+      /// <param name="typeOfObjectToSerialize">type for which all registers serializer are requested</param>
+      /// <returns>the list of all available serializers for a given type</returns>
       IReadOnlyList<IXmlSerializer<TContext>> AllPossibleSerializerFor(Type typeOfObjectToSerialize);
 
       XNamespace Namespace { get; set; }
       bool NeedsDeserialization { get; set; }
 
       /// <summary>
-      ///    if set to true, the node for an empty enumeration will be generated. Otherwise node will be ignored
+      ///    if set to true, the node for an empty enumeration will be generated. Otherwise, node will be ignored
       ///    Default is false;
       /// </summary>
       bool CreateNodeForEmptyEnumeration { get; set; }
@@ -148,10 +148,7 @@ namespace OSPSuite.Serializer.Xml
       private readonly ITypeSimplifier _typeSimplifier;
       private bool _mappingPerformed;
 
-      public virtual void AddSerializer(IXmlSerializer<TContext> serializer)
-      {
-         AddSerializer(serializer.Name, serializer);
-      }
+      public virtual void AddSerializer(IXmlSerializer<TContext> serializer) => AddSerializer(serializer.Name, serializer);
 
       public void AddSerializer(string key, IXmlSerializer<TContext> serializer)
       {
@@ -159,7 +156,7 @@ namespace OSPSuite.Serializer.Xml
             throw new ArgumentException($"A serializer with key '{key}' for type '{serializer.ObjectType}' is already registered in the repository '{GetType()}'.");
 
          if (_mappingPerformed)
-            throw new ArgumentException($"Mapping was already performed (e.g. PerformMapping was called). Cannot add a serialier with key '{key}' for type '{serializer.ObjectType}' in repository '{GetType()}'.");
+            throw new ArgumentException($"Mapping was already performed (e.g. PerformMapping was called). Cannot add a serializer with key '{key}' for type '{serializer.ObjectType}' in repository '{GetType()}'.");
 
          _allSerializer.Add(key, serializer);
       }
@@ -167,29 +164,20 @@ namespace OSPSuite.Serializer.Xml
       public void RemoveSerializer(string key)
       {
          if (_mappingPerformed)
-            throw new ArgumentException($"Mapping was already performed (e.g. PerformMapping was called). Cannot remove a serialier with key '{key}' in repository '{GetType()}'.");
+            throw new ArgumentException($"Mapping was already performed (e.g. PerformMapping was called). Cannot remove a serializer with key '{key}' in repository '{GetType()}'.");
          if (!_allSerializer.Contains(key))
-            throw new KeyNotFoundException($"Serialier with key '{key}' was not found in repository '{GetType()}'.");
+            throw new KeyNotFoundException($"Serializer with key '{key}' was not found in repository '{GetType()}'.");
 
          _allSerializer.Remove(key);
       }
 
       public IXmlSerializer<TContext> this[string serializerKey] => SerializerByKey(serializerKey);
 
-      public IXmlSerializer<TContext> SerializerByKey(string serializerKey)
-      {
-         return _allSerializer.Contains(serializerKey) ? _allSerializer[serializerKey] : null;
-      }
+      public IXmlSerializer<TContext> SerializerByKey(string serializerKey) => _allSerializer.Contains(serializerKey) ? _allSerializer[serializerKey] : null;
 
-      public virtual IXmlSerializer<TContext> SerializerFor<TObjectToSerialize>()
-      {
-         return SerializerFor(typeof (TObjectToSerialize));
-      }
+      public virtual IXmlSerializer<TContext> SerializerFor<TObjectToSerialize>() => SerializerFor(typeof(TObjectToSerialize));
 
-      public IXmlSerializer<TContext> SerializerOrDefaultFor<TObjectToSerialize>()
-      {
-         return SerializerOrDefaultFor(typeof (TObjectToSerialize));
-      }
+      public IXmlSerializer<TContext> SerializerOrDefaultFor<TObjectToSerialize>() => SerializerOrDefaultFor(typeof(TObjectToSerialize));
 
       public IXmlSerializer<TContext> SerializerFor(Type typeOfObjectToSerialize)
       {
@@ -211,10 +199,7 @@ namespace OSPSuite.Serializer.Xml
          return _typeSerializerCache.GetOrAdd(typeOfObjectToSerialize, serializer);
       }
 
-      public IXmlSerializer<TContext> SerializerFor<TObjectToSerialize>(TObjectToSerialize instanceThatNeedToBeSerialized)
-      {
-         return SerializerFor(instanceThatNeedToBeSerialized.GetType());
-      }
+      public IXmlSerializer<TContext> SerializerFor<TObjectToSerialize>(TObjectToSerialize instanceThatNeedToBeSerialized) => SerializerFor(instanceThatNeedToBeSerialized.GetType());
 
       public IReadOnlyList<IXmlSerializer<TContext>> AllPossibleSerializerFor(Type typeOfObjectToSerialize)
       {
@@ -236,10 +221,7 @@ namespace OSPSuite.Serializer.Xml
          _mappingPerformed = true;
       }
 
-      public void Clear()
-      {
-         _allSerializer.Clear();
-      }
+      public void Clear() => _allSerializer.Clear();
 
       private IXmlSerializer<TContext> retrieveSerializerForType(Type typeOfObjectToSerialize)
       {
@@ -250,7 +232,7 @@ namespace OSPSuite.Serializer.Xml
          if (matchingSerializers.Count > 1)
             throw new AmbiguousSerializerException(matchingSerializers, typeOfObjectToSerialize);
 
-         //do we have a serializer that matches the inhouse conventions
+         //do we have a serializer that matches the in-house conventions
          matchingSerializers = _allSerializer.Where(item => $"I{item.ObjectType.Name}" == typeOfObjectToSerialize.Name).ToList();
          if (matchingSerializers.Count == 1)
             return matchingSerializers[0];
@@ -295,20 +277,10 @@ namespace OSPSuite.Serializer.Xml
          throw new SerializerNotFoundException(elementName);
       }
 
-      public XElement CreateElement(string elementName)
-      {
-         return new XElement(Namespace + elementName);
-      }
+      public XElement CreateElement(string elementName) => new XElement(Namespace + elementName);
 
-      public string ElementNameFor(string elementName)
-      {
-         var xname = Namespace + elementName;
-         return xname.ToString();
-      }
+      public string ElementNameFor(string elementName) => (Namespace + elementName).ToString();
 
-      public XElement RenameElement(XElement element, string newName)
-      {
-         return new XElement(Namespace + newName, element.Attributes(), element.Nodes());
-      }
+      public XElement RenameElement(XElement element, string newName) => new XElement(Namespace + newName, element.Attributes(), element.Nodes());
    }
 }

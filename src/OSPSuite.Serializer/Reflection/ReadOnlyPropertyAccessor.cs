@@ -10,18 +10,12 @@ namespace OSPSuite.Serializer.Reflection
 
       public ReadOnlyPropertyAccessor(PropertyInfo readProperty) : base(readProperty.Name, readProperty.PropertyType)
       {
-         _readProperty = readProperty; 
+         _readProperty = readProperty;
          _getHandler = DelegateFactory.CreateGet(readProperty);
       }
 
-      public override object GetValue(object source)
-      {
-         return _getHandler(source);
-      }
+      public override object GetValue(object source) => _getHandler(source);
 
-      public override void SetValue(object destination, object value)
-      {
-         throw new MemberAccessException(_readProperty);
-      }
+      public override void SetValue(object destination, object value) => throw new MemberAccessException(_readProperty);
    }
 }

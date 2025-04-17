@@ -17,10 +17,7 @@ namespace OSPSuite.Serializer.Xml
          _enumerableMap = enumerableMap;
       }
 
-      private bool canBeSerializedAsValue
-      {
-         get { return typeof (TProperty).IsPrimitive || typeof (TProperty) == typeof (string); }
-      }
+      private bool canBeSerializedAsValue => typeof(TProperty).IsPrimitive || typeof(TProperty) == typeof(string);
 
       public XObject Serialize(TObject objectToSerialize, TContext context)
       {
@@ -43,10 +40,12 @@ namespace OSPSuite.Serializer.Xml
 
       public void Deserialize(TObject objectToDeserialize, XElement element, TContext context)
       {
-         if (element == null) return;
+         if (element == null)
+            return;
 
          var entityListNode = element.Element(MappingName);
-         if (entityListNode == null) return;
+         if (entityListNode == null)
+            return;
 
          if (_enumerableMap.AddFunction == null)
             throw new EnumerableMappingException(_enumerableMap);
@@ -55,7 +54,7 @@ namespace OSPSuite.Serializer.Xml
 
          foreach (var childElement in entityListNode.Elements())
          {
-            addFunction(valueFromChildNode(childElement,context));
+            addFunction(valueFromChildNode(childElement, context));
          }
       }
 
@@ -78,7 +77,7 @@ namespace OSPSuite.Serializer.Xml
             return childElement.Value.ConvertedTo<TProperty>();
 
          var serializer = _serializerRepository.SerializerFor(childElement);
-         return serializer.Deserialize<TProperty>(childElement,context);
+         return serializer.Deserialize<TProperty>(childElement, context);
       }
    }
 }

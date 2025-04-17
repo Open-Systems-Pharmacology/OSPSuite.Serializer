@@ -28,21 +28,16 @@ namespace OSPSuite.Serializer.Tests
 
    public class Entity : IEntity
    {
-      private readonly string _id;
-
       public Entity() : this("0")
       {
       }
 
       public Entity(string id)
       {
-         _id = id;
+         Id = id;
       }
 
-      public string Id
-      {
-         get { return _id; }
-      }
+      public string Id { get; }
    }
 
    public class Model
@@ -52,10 +47,10 @@ namespace OSPSuite.Serializer.Tests
       public Entity Entity { get; set; }
    }
 
-   public interface  IContainer2
+   public interface IContainer2
    {
-      
    }
+
    public class Container : Entity
    {
       private readonly IList<IEntity> _allChildren = new List<IEntity>();
@@ -91,27 +86,13 @@ namespace OSPSuite.Serializer.Tests
       public string Description;
 
       public string AutoPropertyReadOnly { get; private set; }
-      public string AutoPropertyReadOnlyNoSetter { get;  }
+      public string AutoPropertyReadOnlyNoSetter { get; }
 
-      private string m_ProjectPath = "";
+      public string ProjectPath { get; } = "";
 
-      public string ProjectPath
-      {
-         get { return m_ProjectPath; }
-      }
+      public string ProjectManager { get; } = "";
 
-      private string m_projectManager = "";
-      private string lowcaseProperty = "abc";
-
-      public string ProjectManager
-      {
-         get { return m_projectManager; }
-      }
-
-      public string LowCaseProperty
-      {
-         get { return lowcaseProperty; }
-      }
+      public string LowCaseProperty { get; } = "abc";
 
       public string PropertyWithoutBackingField
       {
@@ -197,9 +178,10 @@ namespace OSPSuite.Serializer.Tests
       {
       }
    }
-   public class EntityCache : Cache<string,Entity>
+
+   public class EntityCache : Cache<string, Entity>
    {
-      public EntityCache() : base(x=>x.Id)
+      public EntityCache() : base(x => x.Id)
       {
       }
    }
@@ -228,8 +210,6 @@ namespace OSPSuite.Serializer.Tests
    {
    }
 
-  
-
    public class Parameter
    {
       public int Id { get; set; }
@@ -241,8 +221,8 @@ namespace OSPSuite.Serializer.Tests
       {
          Id = 5;
          DisplayName = "bon jovi";
-         ParameterInfo = new ParameterInfo {Description = "tralala"};
-         Units = new List<IUnit> {new Unit {Name = "ml"}, new Unit {Name = "cl"}};
+         ParameterInfo = new ParameterInfo { Description = "tralala" };
+         Units = new List<IUnit> { new Unit { Name = "ml" }, new Unit { Name = "cl" } };
       }
    }
 
@@ -261,6 +241,4 @@ namespace OSPSuite.Serializer.Tests
    {
       public string Description { get; set; }
    }
-
-  
 }

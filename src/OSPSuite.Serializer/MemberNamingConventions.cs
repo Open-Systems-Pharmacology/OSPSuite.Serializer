@@ -24,21 +24,13 @@ namespace OSPSuite.Serializer
          _suffix = suffix;
       }
 
-      public string Transform(string name)
-      {
-         return $"{_prefix}{name}{_suffix}";
-      }
+      public string Transform(string name) => $"{_prefix}{name}{_suffix}";
 
-      public bool Matches(string memberName, string propertyName)
-      {
-         return string.Equals(memberName.ToLowerInvariant(), Transform(propertyName).ToLowerInvariant());
-      }
+      public bool Matches(string memberName, string propertyName) => string.Equals(memberName.ToLowerInvariant(), Transform(propertyName).ToLowerInvariant());
 
-      public bool Transformed(string name)
-      {
-         return name.StartsWith(_prefix) &&
-                name.EndsWith(_suffix);
-      }
+      public bool Transformed(string name) =>
+         name.StartsWith(_prefix) &&
+         name.EndsWith(_suffix);
 
       public string Original(string input)
       {

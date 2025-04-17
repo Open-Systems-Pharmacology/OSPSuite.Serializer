@@ -16,7 +16,7 @@ namespace OSPSuite.Serializer.Xml
 
       public XObject Serialize(TObject objectToSerialize, TContext context)
       {
-         string value = _attributeMapper.Convert(_propertyMap.ResolveValue(objectToSerialize), context);
+         var value = _attributeMapper.Convert(_propertyMap.ResolveValue(objectToSerialize), context);
          if (string.IsNullOrEmpty(value))
             return null;
 
@@ -25,9 +25,11 @@ namespace OSPSuite.Serializer.Xml
 
       public void Deserialize(TObject objectToDeserialize, XElement element, TContext context)
       {
-         //attrbiute does not exist? do not set any value
-         XAttribute attribute = element.Attribute(MappingName);
-         if (attribute == null) return;
+         //attribute does not exist? do not set any value
+         var attribute = element.Attribute(MappingName);
+         if (attribute == null)
+            return;
+
          _propertyMap.SetValue(objectToDeserialize, _attributeMapper.ConvertFrom(attribute.Value, context));
       }
    }

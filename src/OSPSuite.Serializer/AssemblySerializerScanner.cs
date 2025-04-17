@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using OSPSuite.Serializer.Attributes;
 using OSPSuite.Serializer.Xml;
@@ -22,30 +21,18 @@ namespace OSPSuite.Serializer
       private IAttributeMapperRepository<TContext> _attributeMapperRepository;
       private Type _serializerType;
 
-      public AssemblySerializerScanner(IXmlSerializerRepository<TContext> serializerRepository)
-      {
-         _serializerRepository = serializerRepository;
-      }
+      public AssemblySerializerScanner(IXmlSerializerRepository<TContext> serializerRepository) => _serializerRepository = serializerRepository;
 
-      public void Implementing<T>() where T : class, IXmlSerializer
-      {
-         _serializerType = typeof (T);
-      }
+      public void Implementing<T>() where T : class, IXmlSerializer => _serializerType = typeof(T);
 
-      public void InAssemblyContainingType<T>()
-      {
-         _assembly = typeof (T).Assembly;
-      }
+      public void InAssemblyContainingType<T>() => _assembly = typeof(T).Assembly;
 
-      public void UsingAttributeRepository(IAttributeMapperRepository<TContext> attributeMapperRepository)
-      {
-         _attributeMapperRepository = attributeMapperRepository;
-      }
+      public void UsingAttributeRepository(IAttributeMapperRepository<TContext> attributeMapperRepository) => _attributeMapperRepository = attributeMapperRepository;
 
       public void Scan()
       {
          verifyConfiguration();
-         IEnumerable<Type> allSerializerTypes = _assembly.GetAllConcreteTypesImplementing(_serializerType);
+         var allSerializerTypes = _assembly.GetAllConcreteTypesImplementing(_serializerType);
 
          allSerializerTypes.Each(addSerializerToRepository);
       }

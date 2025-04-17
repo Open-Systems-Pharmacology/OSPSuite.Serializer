@@ -16,7 +16,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_memmber_accessor_for_a_property_that_is_read_write : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_a_property_that_is_read_write : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -50,7 +50,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_memmber_accessor_for_a_public_field : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_a_public_field : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -78,7 +78,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_memmber_accessor_for_a_readonly_property_with_backing_field_in_camel_case : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_a_readonly_property_with_backing_field_in_camel_case : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -90,7 +90,7 @@ namespace OSPSuite.Serializer.Tests
       [Observation]
       public void should_return_a_field_accessor()
       {
-         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccesor>();
+         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccessor>();
       }
 
       [Observation]
@@ -106,7 +106,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_memmber_accessor_for_a_readonly_property_with_backing_field_in_lowcase : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_a_readonly_property_with_backing_field_in_lowercase : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -118,7 +118,7 @@ namespace OSPSuite.Serializer.Tests
       [Observation]
       public void should_return_a_field_accessor()
       {
-         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccesor>();
+         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccessor>();
       }
 
       [Observation]
@@ -134,7 +134,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_memmber_accessor_for_a_readonly_property_with_backing_field_in_hungarian_style_and_lower_case : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_a_readonly_property_with_backing_field_in_hungarian_style_and_lower_case : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -146,7 +146,7 @@ namespace OSPSuite.Serializer.Tests
       [Observation]
       public void should_return_a_read_only_property_accessor()
       {
-         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccesor>();
+         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccessor>();
       }
 
       [Observation]
@@ -190,7 +190,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_member_accessor_for_an_auto_propery_read_only : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_an_auto_property_read_only : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -218,7 +218,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_member_accessor_for_an_auto_propery_read_only_with_a_property_set_protected : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_an_auto_property_read_only_with_a_property_set_protected : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -246,7 +246,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_member_accessor_for_an_auto_propery_read_only_without_setter : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_an_auto_property_read_only_without_setter : concern_for_member_accessor_factory
    {
       private IMemberAccessor _result;
 
@@ -258,7 +258,7 @@ namespace OSPSuite.Serializer.Tests
       [Observation]
       public void should_return_a_read_write_property_accessor()
       {
-         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccesor>();
+         _result.ShouldBeAnInstanceOf<ReadOnlyPropertyWithPrivateFieldAccessor>();
       }
 
       [Observation]
@@ -277,7 +277,7 @@ namespace OSPSuite.Serializer.Tests
    public class When_creating_a_member_accessor_for_a_method_or_a_function : concern_for_member_accessor_factory
    {
       [Observation]
-      public void should_throw_an_excepttion()
+      public void should_throw_an_exception()
       {
          The.Action(() => sut.CreateFor<Project, string>(x => x.DoSomething())).ShouldThrowAn<Exception>();
       }
@@ -357,7 +357,7 @@ namespace OSPSuite.Serializer.Tests
       }
    }
 
-   public class When_creating_a_member_accessor_for_a_private_field_that_does_exit_but_with_the_wrong_typy : concern_for_member_accessor_factory
+   public class When_creating_a_member_accessor_for_a_private_field_that_does_exit_but_with_the_wrong_type : concern_for_member_accessor_factory
    {
       [Observation]
       public void should_throw_an_exception()

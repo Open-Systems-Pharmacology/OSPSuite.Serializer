@@ -13,13 +13,12 @@ namespace OSPSuite.Serializer
          var sb = new StringBuilder();
          sb.AppendLine($"Ambiguous serializer implementation for '{typeOfObjectToSerialize}'.");
          sb.AppendLine("Possible implementations are:");
-         foreach (object possibleImplementation in allPossibleImplementations)
+         foreach (var possibleImplementation in allPossibleImplementations)
          {
             sb.AppendLine($"\tSerializer<{possibleImplementation.GetType().FullName}>");
          }
 
          Message = sb.ToString();
       }
-
    }
 }

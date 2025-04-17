@@ -5,12 +5,7 @@ namespace OSPSuite.Serializer.Attributes
 {
    public class ColorAttributeMapper<TContext> : AttributeMapper<Color, TContext>
    {
-      private readonly NumberFormatInfo _numberFormatInfo;
-
-      public ColorAttributeMapper()
-      {
-         _numberFormatInfo = new NumberFormatInfo();
-      }
+      private readonly NumberFormatInfo _numberFormatInfo = new NumberFormatInfo();
 
       public override string Convert(Color color, TContext context)
       {

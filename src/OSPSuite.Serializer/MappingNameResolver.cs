@@ -13,20 +13,20 @@ namespace OSPSuite.Serializer
             return input;
 
          //remove m_ or _ at the beginning
-         string trimedInput = input;
+         var trimmedInput = input;
          foreach (var convention in MemberNamingConventions.AllConventions)
          {
-            if (convention.Transformed(trimedInput))
+            if (convention.Transformed(trimmedInput))
             {
-               trimedInput = convention.Original(input);
+               trimmedInput = convention.Original(input);
                break;
             }
          }
 
-         if (string.IsNullOrEmpty(trimedInput))
+         if (string.IsNullOrEmpty(trimmedInput))
             return input;
 
-         return trimedInput;
+         return trimmedInput;
       }
    }
 }

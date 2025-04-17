@@ -20,7 +20,7 @@ namespace OSPSuite.Serializer.Xml
       protected readonly IXmlSerializerRepository<TContext> _serializerRepository;
 
       public XmlMappingPart(IPropertyMap propertyMap, IXmlSerializerRepository<TContext> serializerRepository,
-                            IAttributeMapperRepository<TContext> attributeMapperRepository)
+         IAttributeMapperRepository<TContext> attributeMapperRepository)
          : base(propertyMap)
       {
          _serializerRepository = serializerRepository;
@@ -66,7 +66,7 @@ namespace OSPSuite.Serializer.Xml
             else if (allSerializers.Count > 1)
                nodeMapper = new DynamicNodeMapper<TObject, TContext>(_serializerRepository, PropertyMap);
             else
-               throw new SerializerNotFoundException(PropertyMap.PropertyType, typeof (TObject));
+               throw new SerializerNotFoundException(PropertyMap.PropertyType, typeof(TObject));
          }
          else
             nodeMapper = new XmlStaticMapper<TObject, TContext>(_serializerRepository, serializer, PropertyMap);
@@ -85,12 +85,12 @@ namespace OSPSuite.Serializer.Xml
       {
          var attributeMapper = _attributeMapperRepository.AttributeMapperOrDefaultFor(PropertyMap.PropertyType);
          if (attributeMapper == null)
-            throw new AttributeMappingException(typeof (TObject), PropertyMap.Name);
+            throw new AttributeMappingException(typeof(TObject), PropertyMap.Name);
 
          return new XmlAttributeMapper<TObject, TContext>(PropertyMap, attributeMapper)
-            {
-               MappingName = MappingName ?? PropertyMap.MappingName.ToPascalCase()
-            };
+         {
+            MappingName = MappingName ?? PropertyMap.MappingName.ToPascalCase()
+         };
       }
    }
 }

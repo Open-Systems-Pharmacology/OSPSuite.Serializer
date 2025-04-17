@@ -19,20 +19,14 @@ namespace OSPSuite.Serializer.Xml.Extensions
          return element;
       }
 
-      public static XElement AddAttribute(this XElement element, string attributeName, int attributeValue)
-      {
-         return AddAttribute(element, attributeName, attributeValue.ToString(NumberFormatInfo.InvariantInfo));
-      }
+      public static XElement AddAttribute(this XElement element, string attributeName, int attributeValue) =>
+         AddAttribute(element, attributeName, attributeValue.ToString(NumberFormatInfo.InvariantInfo));
 
-      public static XElement AddAttribute(this XElement element, string attributeName, double attributeValue)
-      {
-         return AddAttribute(element, attributeName, attributeValue.ToString(NumberFormatInfo.InvariantInfo));
-      }
+      public static XElement AddAttribute(this XElement element, string attributeName, double attributeValue) =>
+         AddAttribute(element, attributeName, attributeValue.ToString(NumberFormatInfo.InvariantInfo));
 
-      public static XElement AddAttribute(this XElement element, string attributeName, float attributeValue)
-      {
-         return AddAttribute(element, attributeName, attributeValue.ToString(NumberFormatInfo.InvariantInfo));
-      }
+      public static XElement AddAttribute(this XElement element, string attributeName, float attributeValue) =>
+         AddAttribute(element, attributeName, attributeValue.ToString(NumberFormatInfo.InvariantInfo));
 
       public static string GetAttribute(this XElement element, string attributeName)
       {
@@ -43,8 +37,8 @@ namespace OSPSuite.Serializer.Xml.Extensions
       public static XElement GetFirstElementWithAttribute(this XElement element, string attributeName, string attributeValue)
       {
          var query = from childElement in element.Elements()
-                                       where string.Equals(childElement.GetAttribute(SerializerConstants.DynamicName), attributeValue)
-                                       select childElement;
+            where string.Equals(childElement.GetAttribute(SerializerConstants.DynamicName), attributeValue)
+            select childElement;
 
          return query.FirstOrDefault();
       }

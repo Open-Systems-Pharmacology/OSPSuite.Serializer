@@ -7,14 +7,8 @@ namespace OSPSuite.Serializer.Reflection
    {
       private readonly SetHandler _setHandler;
 
-      public ReadWritePropertyAccessor(PropertyInfo propertyInfo) : base(propertyInfo)
-      {
-            _setHandler = DelegateFactory.CreateSet(propertyInfo);
-      }
+      public ReadWritePropertyAccessor(PropertyInfo propertyInfo) : base(propertyInfo) => _setHandler = DelegateFactory.CreateSet(propertyInfo);
 
-      public override void SetValue(object destination, object value)
-      {
-         _setHandler(destination, value);
-      }
+      public override void SetValue(object destination, object value) => _setHandler(destination, value);
    }
 }

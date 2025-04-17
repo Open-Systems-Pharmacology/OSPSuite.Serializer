@@ -30,31 +30,22 @@ namespace OSPSuite.Serializer
 
       public Func<TObject, TContext, Action<TProperty>> AddFunction { get; set; }
       public string MappingName { get; set; }
-      public string Name { get; private set; }
+      public string Name { get; }
 
       public IEnumerable<TProperty> Enumerate(TObject source)
       {
          return _enumerable(source);
       }
 
-      public Type ObjectType
-      {
-         get { return typeof (TObject); }
-      }
+      public Type ObjectType => typeof(TObject);
 
-      public object ResolveValue(object source)
-      {
-         return Enumerate(source.DowncastTo<TObject>());
-      }
+      public object ResolveValue(object source) => Enumerate(source.DowncastTo<TObject>());
 
       public void SetValue(object destination, object valueToSet)
       {
          //nothing to do here
       }
 
-      public Type PropertyType
-      {
-         get { return typeof (TProperty); }
-      }
+      public Type PropertyType => typeof(TProperty);
    }
 }
