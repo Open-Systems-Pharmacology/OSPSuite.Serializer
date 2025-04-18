@@ -54,7 +54,9 @@ namespace OSPSuite.Serializer.Xml
 
          foreach (var childElement in entityListNode.Elements())
          {
-            addFunction(valueFromChildNode(childElement, context));
+            var value = valueFromChildNode(childElement, context);
+            if(value != null)
+               addFunction(value);
          }
       }
 
@@ -77,7 +79,7 @@ namespace OSPSuite.Serializer.Xml
             return childElement.Value.ConvertedTo<TProperty>();
 
          var serializer = _serializerRepository.SerializerFor(childElement);
-         return serializer.Deserialize<TProperty>(childElement, context);
+         return serializer == null ? default : serializer.Deserialize<TProperty>(childElement, context);
       }
    }
 }

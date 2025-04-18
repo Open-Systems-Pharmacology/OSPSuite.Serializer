@@ -272,9 +272,7 @@ namespace OSPSuite.Serializer.Xml
       public IXmlSerializer<TContext> SerializerFor(XElement element)
       {
          var elementName = element.Name.LocalName;
-         var serializer = SerializerByKey(elementName);
-         if (serializer != null) return serializer;
-         throw new SerializerNotFoundException(elementName);
+         return SerializerByKey(elementName);
       }
 
       public XElement CreateElement(string elementName) => new XElement(Namespace + elementName);
